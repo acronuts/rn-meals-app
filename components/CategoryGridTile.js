@@ -17,7 +17,10 @@ const CategoryGridTile = (props) => {
 
   return (
     <View style={styles.gridItem}>
-      <TouchableComp style={{ flex: 1 }} onPress={props.onSelect}>
+      <TouchableComp
+        style={{ flex: 1 }}
+        onPress={props.onSelect}
+        background={TouchableNativeFeedback.Ripple("#FFFFFF", true)}>
         <View
           style={{ ...styles.container, ...{ backgroundColor: props.color } }}>
           <Text style={styles.title} numberOfLines={2}>
@@ -35,7 +38,11 @@ const styles = StyleSheet.create({
     margin: 15,
     height: 150,
     borderRadius: 10,
-    overflow: 'hidden'
+    overflow:
+      Platform.OS === "android" && Platform.Version >= 21
+        ? "hidden"
+        : "visible",
+    elevation: 6,
   },
   container: {
     flex: 1,
@@ -44,7 +51,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 10,
-    elevation: 6,
     padding: 10,
     justifyContent: "flex-end",
     alignItems: "flex-end",

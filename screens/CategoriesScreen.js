@@ -7,7 +7,10 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+
 import CategoryGridTile from "../components/CategoryGridTile";
+import CustomHeaderButton from "../components/HeaderButton";
 import { CATEGORIES } from "../data/dummy-data";
 
 const CategoriesScreen = (props) => {
@@ -33,13 +36,17 @@ const CategoriesScreen = (props) => {
   );
 };
 
-// CategoriesScreen.navigationOptions = {
-//     headerTitle: 'Meal Categories',
-//     headerStyle: {
-//         backgroundColor: colors.primaryColor
-//     },
-//     headerTintColor: 'white'
-// }
+CategoriesScreen.navigationOptions = (navData) => {
+  return {
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item title="Menu" iconName="ios-menu" onPress={() => {
+          navData.navigation.toggleDrawer()
+        }} />
+      </HeaderButtons>
+    ),
+  };
+};
 
 const styles = StyleSheet.create({
   screen: {
