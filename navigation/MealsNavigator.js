@@ -129,7 +129,7 @@ const MainNavigator = createDrawerNavigator(
       navigationOptions: {
         drawerLabel: "Meals",
         drawerIcon: ({ tintColor }) => (
-          <Ionicons name="ios-restaurant" size={22} color={tintColor} />
+          <Ionicons name="restaurant" size={22} color={tintColor} />
         ),
       },
     },
@@ -137,7 +137,7 @@ const MainNavigator = createDrawerNavigator(
       screen: FilterNavigator,
       navigationOptions: {
         drawerIcon: ({ tintColor }) => (
-          <Ionicons name="ios-filter" size={22} color={tintColor} />
+          <Ionicons name="options" size={26} color={tintColor} />
         ),
       },
     },

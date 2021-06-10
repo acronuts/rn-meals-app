@@ -1,15 +1,17 @@
 import React, { useEffect, useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import { View, Text, StyleSheet, Switch, Platform } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../components/HeaderButton";
 import colors from "../constants/colors";
+import { setFilters } from "../store/actions/meals";
 
 const FilterSwitch = (props) => {
   return (
     <View style={styles.filterContainer}>
       <Text>{props.label}</Text>
       <Switch
-        trackColor={{ true: colors.accentColor, false: colors.accentColor }}
+        trackColor={{ true: colors.accentColor, false: '#ccc' }}
         thumbColor={Platform.OS === "android" ? colors.accentColor2 : ""}
         value={props.value}
         onValueChange={props.onChange}
@@ -26,6 +28,8 @@ const FiltersScreen = (props) => {
   const [isVegan, setIsVegan] = useState(false);
   const [isVegetarian, setIsVegetarian] = useState(false);
 
+  const dispatch = useDispatch()
+
   const saveFilters = useCallback(() => {
     const appliedFilters = {
       glutenFree: isGlutenFree,
@@ -34,8 +38,8 @@ const FiltersScreen = (props) => {
       vegetarian: isVegetarian,
     };
 
-    console.log(appliedFilters);
-  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
+    dispatch(setFilters(appliedFilters))
+  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian, dispatch]);
 
   useEffect(() => {
     navigation.setParams({
